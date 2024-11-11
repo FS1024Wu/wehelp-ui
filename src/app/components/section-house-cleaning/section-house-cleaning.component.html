@@ -1,0 +1,93 @@
+<section id="house-cleaning">
+  <h2>House Cleaning</h2>
+  <!-- cleaning house address -->
+  <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+    <p>Enter the property address for the cleaning service:</p>
+    <app-address-autocomplete
+      id="house-cleaning-address-to"
+      (addressSelected)="onAddressSelected($event, 'to')"
+      (addressInputted)="onAddressChange($event, 'to')">
+    </app-address-autocomplete>
+    <div *ngIf="!departureLocation?.formattedAddress && form.submitted" class="error">
+      recommended from address is not selected.
+    </div>
+
+
+    <span>Floorplan:
+    <select id="cleaningToPropertyTypeFrom" name="cleaningToPropertyTypeFrom" [(ngModel)]="cleaningToPropertyTypeFrom">
+      <option [ngValue]="undefined" disabled>Select the property type</option>
+      <option *ngFor="let type of propertyTypes" [ngValue]="type">
+        {{ type }}
+      </option>
+    </select>
+    </span>
+    <div></div>
+
+    <span>Bedroom:
+    <select id="bedrooms" [(ngModel)]="bedrooms" name="bedrooms" required>
+      <option [ngValue]="undefined" disabled>Select the number of bedroom</option>
+      <option *ngFor="let bedroom of Utils.bedrooms" [ngValue]="bedroom">
+        {{ bedroom }}
+      </option>
+    </select></span>
+    <div></div>
+
+    <span>Bathroom:
+    <select id="bathrooms" [(ngModel)]="bathrooms" name="bathrooms" required>
+      <option [ngValue]="undefined" disabled>Select the number of bathroom</option>
+      <option *ngFor="let bathroom of Utils.bathrooms" [ngValue]="bathroom">
+        {{ bathroom }}
+      </option>
+    </select></span>
+    <div></div>
+
+
+
+    <div>
+    <br>
+      <span>Cleaner:
+        <select id="helpers" [(ngModel)]="helpers" name="helpers" required>
+          <option [ngValue]="undefined" disabled>Select number of helpers needed</option>
+          <option *ngFor="let helper of Utils.helpers" [ngValue]="helper">
+            {{ helper }}
+          </option>
+        </select>
+      </span>
+      <div></div>
+      <span>Hour:
+        <select id="hours" [(ngModel)]="hours" name="hours" required>
+          <option [ngValue]="undefined" disabled>Select 0 for free estimate</option>
+          <option *ngFor="let hour of Utils.helper_hours" [ngValue]="hour">
+          {{ hour }}
+          </option>
+        </select>
+      </span>
+    </div>
+
+
+    <!-- Service Start Time -->
+    <div>
+      <p>Service start time:</p>
+      <input type="date" name="fromDate" [(ngModel)]="fromDate" [min]="today" required/>
+      <div *ngIf="fromDate.length==0 && form.submitted" class="error">Pick-up date is required.</div>
+
+      <select [(ngModel)]="fromHour" name="fromHour" required>
+        <option disabled value="" selected>Select hour</option>
+        <option *ngFor="let hour of Utils.hours" [value]="hour">{{ hour }}</option>
+      </select>
+      <div *ngIf="fromHour.length==0 && form.submitted" class="error">Pick-up hour is required.</div>
+
+      <select [(ngModel)]="fromMinute" name="fromMinute" required>
+        <option disabled value="" selected>Select minute</option>
+        <option *ngFor="let minute of Utils.minutes" [value]="minute">{{ minute }}</option>
+      </select>
+      <div *ngIf="fromMinute.length==0 && form.submitted" class="error">Pick-up minute is required.</div>
+    </div>
+
+    <!-- Submit Button (Disabled if Form is Invalid) -->
+    <div>
+    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Submit</button>
+    </div>
+  </form>
+
+</section>

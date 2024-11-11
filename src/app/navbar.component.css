@@ -1,0 +1,176 @@
+/* Navbar container */
+header {
+  background-color: #2c3e50;
+  padding: 10px 20px;
+}
+
+.navbar {
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap if needed */
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Navbar items */
+.navbar li {
+  position: relative;
+  margin: 5px;
+}
+
+/* Navbar links */
+.navbar a {
+  color: white;
+  text-decoration: none;
+  padding: 10px 15px;
+  display: block;
+}
+
+.navbar a:hover {
+  background-color: #555;
+  border-radius: 5px;
+}
+
+/* Dropdown menu styling */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  background-color: #34495e;
+  border-radius: 5px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  z-index: 1000;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu li a {
+  color: white;
+  padding: 10px;
+  display: block;
+}
+
+.dropdown-menu li a:hover {
+  background-color: #555;
+  border-radius: 5px;
+}
+
+/* Language Switcher */
+#language-switcher {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
+.language-btn {
+  background-color: #34495e;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.language-menu {
+  display: none;
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background-color: #34495e;
+  border-radius: 5px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/*#language-switcher:hover .language-menu {*/
+/*  display: block;*/
+/*}*/
+/* Fix for disappearing menu: keep hover state when moving to menu */
+#language-switcher:hover,
+#language-switcher:hover .language-menu {
+  display: block;
+  top: 5px;
+  right: 10px;
+}
+
+
+.language-menu button {
+  color: white;
+  background: none;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  text-align: left;
+}
+
+.language-menu button:hover {
+  background-color: #f39c12;
+  border-radius: 5px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column; /* Stack items vertically */
+  }
+
+  .navbar li {
+    margin: 0;
+    text-align: center;
+    width: 100%;
+  }
+
+  .language-btn {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar a {
+    font-size: 14px; /* Adjust font size for smaller screens */
+  }
+
+  .language-btn {
+    font-size: 14px;
+  }
+}
+
+
+.navbar button {
+  color: white;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.navbar button:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  section {
+    height: auto; /* Allow section content to grow beyond viewport height */
+  }
+}
+:host {
+  display: block;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.router-outlet {
+  opacity: 1;
+}
+
+button.active {
+  font-weight: bold;
+  text-decoration: underline;
+}
