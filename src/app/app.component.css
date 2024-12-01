@@ -1,0 +1,11 @@
+/* General styles for body */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Ensure content spans full height */
+:host {
+  display: block;
+  height: 100%;
+}

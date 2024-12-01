@@ -1,0 +1,30 @@
+<header>
+  <nav>
+    <button class="hamburger-btn" (click)="toggleNavbar()">☰</button>
+    <ul class="navbar" [class.collapsed]="isNavbarCollapsed">
+      <li><a href="#moving">Moving</a></li>
+      <li><a href="#taxi">Taxi</a></li>
+      <li><a href="#house-cleaning">House Cleaning</a></li>
+      <li><a href="#deep-cleaning">Deep Cleaning</a></li>
+      <li><a href="#about">About</a></li>
+      <!-- Join Us Dropdown -->
+      <li class="dropdown">
+        <a href="#">Join Us</a>
+        <ul class="dropdown-menu">
+          <li><a href="#individual">Individual</a></li>
+          <li><a href="#business">Business</a></li>
+        </ul>
+      </li>
+    </ul>
+    <!-- Language Switcher -->
+    <div id="language-switcher" class="dropdown">
+      <button class="language-btn">🌐</button>
+      <ul class="language-menu">
+        <li><button (click)="changeLanguage('EN')">English</button></li>
+        <li><button (click)="changeLanguage('ZH')">中文</button></li>
+        <li><button (click)="changeLanguage('KO')">한국어</button></li>
+        <li><button (click)="changeLanguage('ES')">Español</button></li>
+      </ul>
+    </div>
+  </nav>
+</header>
