@@ -142,3 +142,35 @@ header {
     font-size: 14px;
   }
 }
+
+
+.navbar button {
+  color: white;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.navbar button:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  section {
+    height: auto; /* Allow section content to grow beyond viewport height */
+  }
+}
+:host {
+  display: block;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.router-outlet {
+  opacity: 1;
+}
+
+button.active {
+  font-weight: bold;
+  text-decoration: underline;
+}

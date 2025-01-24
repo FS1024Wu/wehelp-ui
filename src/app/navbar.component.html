@@ -1,18 +1,17 @@
 <header>
   <nav>
-    <button class="hamburger-btn" (click)="toggleNavbar()">☰</button>
-    <ul class="navbar" [class.collapsed]="isNavbarCollapsed">
-      <li><a href="#moving">Moving</a></li>
-      <li><a href="#taxi">Taxi</a></li>
-      <li><a href="#house-cleaning">House Cleaning</a></li>
-      <li><a href="#deep-cleaning">Deep Cleaning</a></li>
-      <li><a href="#about">About</a></li>
+    <ul class="navbar">
+      <li><button routerLink='/moving' routerLinkActive="active">Moving</button></li>
+      <li><button routerLink='/taxi' routerLinkActive="active">Taxi</button></li>
+      <li><button routerLink='/house' routerLinkActive="active">House Cleaning</button></li>
+      <li><button routerLink='/deep' routerLinkActive="active">Deep Cleaning</button></li>
+      <li><button routerLink='/about' routerLinkActive="active">About</button></li>
       <!-- Join Us Dropdown -->
       <li class="dropdown">
         <a href="#">Join Us</a>
         <ul class="dropdown-menu">
-          <li><a href="#individual">Individual</a></li>
-          <li><a href="#business">Business</a></li>
+          <li><button routerLink='/individual' routerLinkActive="active">Individual</button></li>
+          <li><button routerLink='/business' routerLinkActive="active">Business</button></li>
         </ul>
       </li>
     </ul>
@@ -28,3 +27,4 @@
     </div>
   </nav>
 </header>
+<router-outlet></router-outlet>

@@ -1,0 +1,78 @@
+<section id="taxi">
+  <h2>Pick-up and Drop-off service</h2>
+
+  <form (ngSubmit)="onSubmit()" #form="ngForm">
+
+    <div>
+    <p>Enter the departure location</p>
+    <app-address-autocomplete
+      id="taxi-address-from"
+      (addressSelected)="onAddressSelected($event, 'from')">
+    </app-address-autocomplete>
+    </div>
+
+    <div>
+    <p>Enter the destination location</p>
+    <app-address-autocomplete
+      id="taxi-address-to"
+      (addressSelected)="onAddressSelected($event, 'to')">
+    </app-address-autocomplete>
+    </div>
+
+    <!-- Toggle Switch -->
+    <div class="toggle-container">
+      <label class="toggle-switch">
+        <input
+          type="checkbox"
+          [(ngModel)]="isRequestedByHours"
+          (change)="onToggleChange($event)"
+          name="serviceRequestToggle"
+        />
+        <span class="slider"></span>
+      </label>
+      <span class="toggle-label">
+      {{ isRequestedByHours ? 'Service request by hours' : 'Service request by trip' }}
+      </span>
+    </div>
+
+    <!-- Time Fields -->
+    <div>
+    <p>Pick-up time</p>
+    <input
+      type="date"
+      [(ngModel)]="fromDate"
+      name="fromDate"
+      [min]=today
+      required
+    />
+    <select [(ngModel)]="fromHour" name="fromHour" required>
+      <option *ngFor="let hour of Utils.hours" [value]="hour">{{ hour }}</option>
+    </select>
+    <select [(ngModel)]="fromMinute" name="fromMinute" required>
+      <option *ngFor="let minute of Utils.minutes" [value]="minute">{{ minute }}</option>
+    </select>
+    </div>
+    <br>
+
+
+    <!-- Conditional To Time -->
+    <div *ngIf="isRequestedByHours">
+      <p>Appx service finish time</p>
+      <input
+        type="date"
+        [(ngModel)]="toDate"
+        name="toDate"
+        [min]="today"
+        required
+      />
+      <select [(ngModel)]="toHour" name="toHour" required>
+        <option *ngFor="let hour of Utils.hours" [value]="hour">{{ hour }}</option>
+      </select>
+      <select [(ngModel)]="toMinute" name="toMinute" required>
+        <option *ngFor="let minute of Utils.minutes" [value]="minute">{{ minute }}</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</section>
