@@ -6,6 +6,7 @@ import { SectionComponent } from './section.component';
 import {RouterModule} from '@angular/router';
 import {routes} from './app.routes';
 import {AddressComponent} from './components/address/address.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,10 +19,11 @@ import {AddressComponent} from './components/address/address.component';
     SectionComponent,
     AddressComponent,
     RouterModule.forRoot(routes),
-    AddressComponent
+    AddressComponent,
+    FormsModule,
   ],
   exports: [RouterModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: []
 })
 export class AppModule {}

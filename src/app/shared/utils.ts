@@ -4,6 +4,7 @@ export class Utils {
   static readonly API_URL = 'https://api.example.com';
   static hours: string[] = Array.from({ length: 24 }, (_, i) => i.toString().padStart(2, '0')); // ["00", "01", ..., "23"]
   static minutes: string[] = Array.from({ length: 12 }, (_, i) => (i * 5).toString().padStart(2, '0')); // ["00", "05", ..., "55"]
+  static helpers: number[] = [0,1,2,3,4,5]
 
   // Example: Utility Methods
   static formatDate(date: Date): string {

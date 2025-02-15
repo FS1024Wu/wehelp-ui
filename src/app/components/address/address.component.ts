@@ -11,8 +11,8 @@ import {Address} from '../../model/requests';
 })
 export class AddressComponent implements AfterViewInit    {
   @Input() id: string = 'default-address-id'; // Default id
-  @Input() customPlaceholder: string = 'Enter an address'; // Placeholder text
   @Output() addressSelected = new EventEmitter<any>();
+  @Output() addressInputted = new EventEmitter<any>();
 
   async ngAfterViewInit(): Promise<void> {
     console.log('After view init:', this.id);
@@ -25,14 +25,11 @@ export class AddressComponent implements AfterViewInit    {
     //@ts-ignore
     document.getElementById(this.id)?.appendChild(placeAutocomplete);
 
-    // Inject HTML UI.
-    const selectedPlaceTitle = document.createElement('p');
-    selectedPlaceTitle.textContent = '';
-    document.getElementById(this.id)?.appendChild(selectedPlaceTitle);
 
-    const selectedPlaceInfo = document.createElement('pre');
-    selectedPlaceInfo.textContent = '';
-    document.getElementById(this.id)?.appendChild(selectedPlaceInfo);
+    placeAutocomplete.addEventListener('input', (event: Event) => {
+      const inputEvent = event as InputEvent;
+      this.addressInputted.emit(inputEvent.data);
+    });
 
     // Add the gmp-placeselect listener, and display the results.
     //@ts-ignore
@@ -57,10 +54,4 @@ export class AddressComponent implements AfterViewInit    {
 
   }
 
-
-  onInput(event: Event): void {
-    const inputElement = event.target as HTMLInputElement;
-    const value = inputElement?.value || '';
-    console.log('Input value:', value);
-  }
 }

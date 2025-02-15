@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, NgForm} from '@angular/forms';
 import {AddressComponent} from '../address/address.component';
-import {Utils} from '../../shared/utils';
 import {NgForOf, NgIf} from '@angular/common';
-import {Address} from '../../model/requests';
+import {Address,RequestType} from '../../model/requests';
+import {RequestComponent} from '../request.component';
 
 @Component({
   selector: 'app-section-taxi',
@@ -17,23 +17,13 @@ import {Address} from '../../model/requests';
   templateUrl: './section-taxi.component.html',
   styleUrl: './section-taxi.component.css'
 })
-export class SectionTaxiComponent {
-  protected readonly Utils = Utils;
+export class SectionTaxiComponent extends RequestComponent{
 
-  today: string = this.getToday();
-  departureLocation: Address | undefined ;
-  destinationLocation: Address | undefined ;
-  fromDate: string = '';
-  fromHour: string = '';
-  fromMinute: string = '';
-  toDate: string = '';
-  toHour: string = '';
-  toMinute: string = '';
   isRequestedByHours: boolean = false;
-
-  getToday(): string {
-    const currentDate = new Date();
-    return currentDate.toISOString().split('T')[0]; // Returns "YYYY-MM-DD"
+  requestType: RequestType;
+  constructor() {
+    super();
+    this.requestType = RequestType.TAXI
   }
 
   onAddressSelected(address: Address, type: 'from' | 'to'): void {
@@ -50,10 +40,19 @@ export class SectionTaxiComponent {
     this.isRequestedByHours = (event.target as HTMLInputElement).checked;
   }
 
-  onSubmit(): void {
-    // Use the stored values on form submission
+  onSubmit(form: NgForm): void {
+    console.log(form.value);
     console.log('Submitted Departure Location:', this.departureLocation);
     console.log('Submitted Destination Location:', this.destinationLocation);
+    console.log('Submitted inputDepartureLocation:', this.inputDepartureLocation);
+    console.log('Submitted inputDestinationLocation:', this.inputDestinationLocation);
   }
 
+  onAddressChange(value: string, type: string): void {
+    if (type === 'from') {
+      this.inputDepartureLocation = this.inputDepartureLocation + value;
+    } else if (type === 'to') {
+      this.inputDestinationLocation = this.inputDestinationLocation + value;
+    }
+  }
 }

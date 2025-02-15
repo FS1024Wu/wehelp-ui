@@ -1,24 +1,34 @@
 <section id="taxi">
   <h2>Pick-up and Drop-off service</h2>
 
-  <form (ngSubmit)="onSubmit()" #form="ngForm">
+  <form (ngSubmit)="onSubmit(form)" #form="ngForm">
 
+    <!-- Departure Address -->
     <div>
-    <p>Enter the departure location</p>
-    <app-address-autocomplete
-      id="taxi-address-from"
-      (addressSelected)="onAddressSelected($event, 'from')">
-    </app-address-autocomplete>
+      <p>Enter the departure location:</p>
+      <app-address-autocomplete
+        id="taxi-address-from"
+        (addressSelected)="onAddressSelected($event, 'from')"
+        (addressInputted)="onAddressChange($event, 'from')"
+      ></app-address-autocomplete>
+      <div *ngIf="!departureLocation?.formattedAddress && form.submitted" class="error">
+        recommended departure address is not selected.
+      </div>
     </div>
 
+    <!-- Destination Address -->
     <div>
-    <p>Enter the destination location</p>
-    <app-address-autocomplete
-      id="taxi-address-to"
-      (addressSelected)="onAddressSelected($event, 'to')">
-    </app-address-autocomplete>
+      <p>Enter the destination location:</p>
+      <app-address-autocomplete
+        id="taxi-address-to"
+        (addressSelected)="onAddressSelected($event, 'to')"
+        (addressInputted)="onAddressChange($event, 'to')"
+      ></app-address-autocomplete>
+      <div *ngIf="!destinationLocation?.formattedAddress && form.submitted" class="error">
+        recommended destination address is not selected.
+      </div>
     </div>
-
+    <br>
     <!-- Toggle Switch -->
     <div class="toggle-container">
       <label class="toggle-switch">
@@ -31,48 +41,51 @@
         <span class="slider"></span>
       </label>
       <span class="toggle-label">
-      {{ isRequestedByHours ? 'Service request by hours' : 'Service request by trip' }}
+        {{ isRequestedByHours ? 'Service request by hours' : 'Service request by trip' }}
       </span>
     </div>
 
-    <!-- Time Fields -->
+    <!-- Pick-up Time -->
     <div>
-    <p>Pick-up time</p>
-    <input
-      type="date"
-      [(ngModel)]="fromDate"
-      name="fromDate"
-      [min]=today
-      required
-    />
-    <select [(ngModel)]="fromHour" name="fromHour" required>
-      <option *ngFor="let hour of Utils.hours" [value]="hour">{{ hour }}</option>
-    </select>
-    <select [(ngModel)]="fromMinute" name="fromMinute" required>
-      <option *ngFor="let minute of Utils.minutes" [value]="minute">{{ minute }}</option>
-    </select>
-    </div>
-    <br>
+      <p>Pick-up time:</p>
+      <input type="date" name="fromDate" [(ngModel)]="fromDate" [min]="today" required/>
+      <div *ngIf="fromDate.length==0 && form.submitted" class="error">Pick-up date is required.</div>
 
-
-    <!-- Conditional To Time -->
-    <div *ngIf="isRequestedByHours">
-      <p>Appx service finish time</p>
-      <input
-        type="date"
-        [(ngModel)]="toDate"
-        name="toDate"
-        [min]="today"
-        required
-      />
-      <select [(ngModel)]="toHour" name="toHour" required>
+      <select [(ngModel)]="fromHour" name="fromHour" required>
+        <option disabled value="" selected>Select hour</option>
         <option *ngFor="let hour of Utils.hours" [value]="hour">{{ hour }}</option>
       </select>
-      <select [(ngModel)]="toMinute" name="toMinute" required>
+      <div *ngIf="fromHour.length==0 && form.submitted" class="error">Pick-up hour is required.</div>
+
+      <select [(ngModel)]="fromMinute" name="fromMinute" required>
+        <option disabled value="" selected>Select minute</option>
         <option *ngFor="let minute of Utils.minutes" [value]="minute">{{ minute }}</option>
       </select>
+      <div *ngIf="fromMinute.length==0 && form.submitted" class="error">Pick-up minute is required.</div>
     </div>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <!-- Finish Time (Only if Requested By Hours) -->
+    <div *ngIf="isRequestedByHours">
+      <p>Appx service finish time:</p>
+      <input type="date" name="toDate" [(ngModel)]="toDate"  [min]="fromDate" required/>
+      <div *ngIf="toDate.length==0 && isRequestedByHours && form.submitted" class="error">Finish date is required.</div>
+
+      <select [(ngModel)]="toHour" name="toHour" required>
+        <option disabled value="" selected>Select hour</option>
+        <option *ngFor="let hour of Utils.hours" [value]="hour">{{ hour }}</option>
+      </select>
+      <div *ngIf="toHour.length==0 && isRequestedByHours && form.submitted" class="error">Finish hour is required.</div>
+
+      <select [(ngModel)]="toMinute" name="toMinute" required>
+        <option disabled value="" selected>Select minute</option>
+        <option *ngFor="let minute of Utils.minutes" [value]="minute">{{ minute }}</option>
+      </select>
+      <div *ngIf="toMinute.length==0 && isRequestedByHours && form.submitted" class="error">Finish minute is required.</div>
+    </div>
+
+    <!-- Submit Button (Disabled if Form is Invalid) -->
+    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+      Submit
+    </button>
   </form>
 </section>

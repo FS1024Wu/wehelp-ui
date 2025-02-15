@@ -9,16 +9,34 @@ export interface TaxiRequest {
   toAddress: Address;
   fromTime: string; // Use ISO string format
   toTime: string; // Use ISO string format
-  requestedVehicleType: VehicleType;
+  requestVehicleType: TaxiRequestVehicleType;
 }
 
-export type VehicleType =
-  | 'SEDAN'
+export type MoveRequestVehicleType =
+    'Truck for 1 bedroom'
+  | 'Truck for 2 bedrooms'
+  | 'Truck for 3 bedrooms'
+  | 'Truck for 4 bedrooms'
+  | 'Other'
+  | 'Not needed';
+
+export type TaxiRequestVehicleType =
+   'SEDAN'
   | 'SUV'
   | 'MINIVAN'
-  | 'VAN'
-  | 'PICKUP'
-  | 'TRUCK_1B1B'
-  | 'TRUCK_2B2B'
-  | 'TRUCK_3B3B'
-  | 'TRUCK_4B4B';
+  | 'VAN';
+
+export enum RequestType {
+  TAXI = 'TAXI',
+  MOVING = 'MOVING',
+  HOUSE_CLEANING = 'HOUSE_CLEANING',
+  DEEP_CLEANING = 'DEEP_CLEANING'
+}
+export enum PropertyType {
+  APARTMENT='APARTMENT',
+  CONDO = 'CONDO',
+  SINGLE_FAMILY = 'SINGLE_FAMILY',
+  TOWNHOUSE = 'TOWNHOUSE',
+  MULTIFAMILY = 'MULTIFAMILY',
+  OTHER = 'OTHER'
+}
