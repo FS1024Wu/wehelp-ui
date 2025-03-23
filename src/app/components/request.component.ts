@@ -12,10 +12,10 @@ export class RequestComponent {
   protected readonly Utils = Utils;
 
   today: string = '';
-  departureLocation: Address | undefined;
-  inputDepartureLocation: string = '';
-  destinationLocation: Address | undefined;
-  inputDestinationLocation: string = '';
+  googleDepartureLocation: Address | undefined;
+  userInputDepartureLocation: string = '';
+  googleDestinationLocation: Address | undefined;
+  userInputDestinationLocation: string = '';
   fromDate: string = '';
   fromHour: string = '';
   fromMinute: string = '';
@@ -23,6 +23,11 @@ export class RequestComponent {
   toHour: string = '';
   toMinute: string = '';
 
+
+  // Contact variables
+  phoneNumber: string = '';
+  emailAddress: string = '';
+  preferredContactMethod: string = 'text';
 
   constructor() {
     this.today = this.getServiceStartDay();

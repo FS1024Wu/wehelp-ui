@@ -1,0 +1,38 @@
+.contact-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.prefix, .suffix {
+  background: #eee;
+  padding: 8px;
+  font-weight: bold;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+}
+
+.preferred-method {
+  margin-top: 10px;
+}
+
+.email-container {
+  display: flex;
+  flex-wrap: nowrap;  /* Prevents wrapping on mobile */
+  align-items: center;
+  gap: 4px;  /* Small space between inputs */
+}
+
+.email-container input {
+  flex: 1;  /* Makes inputs flexible */
+  min-width: 40px;  /* Prevents them from shrinking too much */
+  max-width: 100px; /* Controls width on larger screens */
+  text-align: center; /* Centers input text */
+}
+
+.suffix {
+  font-weight: bold;
+  padding: 0 4px;
+}
