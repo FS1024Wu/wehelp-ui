@@ -48,7 +48,7 @@
           {{ type }}
         </option>
       </select>
-      <div *ngIf="!departureLocation?.formattedAddress && form.submitted" class="error">
+      <div *ngIf="!googleDepartureLocation?.formattedAddress && form.submitted" class="error">
         recommended from address is not selected.
       </div>
     </div>
@@ -68,7 +68,7 @@
           {{ type }}
         </option>
       </select>
-      <div *ngIf="!destinationLocation?.formattedAddress && form.submitted" class="error">
+      <div *ngIf="!googleDestinationLocation?.formattedAddress && form.submitted" class="error">
         recommended to address is not selected.
       </div>
     </div>
@@ -149,6 +149,27 @@
         Check if you have any special items such as piano, fine china, art collection, treadmill, etc.
       </p>
     </div>
+
+
+      <!-- Contact Information Section -->
+      <div>
+          <h3>Contact Information</h3>
+
+          <!-- Phone Input -->
+          <app-contact-input
+                  type="phone"
+                  label="Phone Number"
+                  (phoneNumberChange)="phoneNumber = $event">
+          </app-contact-input>
+
+          <!-- Email Input -->
+          <app-contact-input
+                  type="email"
+                  label="Email Address"
+                  (emailChange)="emailAddress = $event"
+                  (preferredMethodChange)="preferredContactMethod = $event">
+          </app-contact-input>
+      </div>
 
     <!-- Submit Button (Disabled if Form is Invalid) -->
     <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Submit</button>

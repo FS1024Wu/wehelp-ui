@@ -4,12 +4,14 @@ import {AddressComponent} from '../address/address.component';
 import {NgForOf, NgIf} from '@angular/common';
 import {Address,RequestType} from '../../model/requests';
 import {RequestComponent} from '../request.component';
+import {ContactInputComponent} from "../contact-input/contact-input.component";
 
 @Component({
   selector: 'app-section-taxi',
   standalone: true,
   imports: [
     FormsModule,
+    ContactInputComponent,
     AddressComponent,
     NgForOf,
     NgIf
@@ -28,11 +30,11 @@ export class SectionTaxiComponent extends RequestComponent{
 
   onAddressSelected(address: Address, type: 'from' | 'to'): void {
     if (type === 'from') {
-      this.departureLocation = address;
-      console.log('Departure Location:', this.departureLocation);
+      this.googleDepartureLocation = address;
+      console.log('Departure Location:', this.googleDepartureLocation);
     } else if (type === 'to') {
-      this.destinationLocation = address;
-      console.log('Destination Location:', this.destinationLocation);
+      this.googleDestinationLocation = address;
+      console.log('Destination Location:', this.googleDestinationLocation);
     }
   }
 
@@ -42,19 +44,23 @@ export class SectionTaxiComponent extends RequestComponent{
 
   onSubmit(form: NgForm): void {
     console.log(form.value);
-    console.log('Submitted Departure Location:', this.departureLocation);
-    console.log('Submitted Destination Location:', this.destinationLocation);
-    console.log('Submitted inputDepartureLocation:', this.inputDepartureLocation);
-    console.log('Submitted inputDestinationLocation:', this.inputDestinationLocation);
+    console.log('Submitted Departure Location:', this.googleDepartureLocation);
+    console.log('Submitted Destination Location:', this.googleDestinationLocation);
+    console.log('Submitted userInputDepartureLocation:', this.userInputDepartureLocation);
+    console.log('Submitted userInputDestinationLocation:', this.userInputDestinationLocation);
     console.log('after submit:', this.requestType);
+    console.log('Form Submitted');
+    console.log('Phone Number:', this.phoneNumber);
+    console.log('Email Address:', this.emailAddress);
+    console.log('Preferred Contact Method:', this.preferredContactMethod);
 
   }
 
   onAddressChange(value: string, type: string): void {
     if (type === 'from') {
-      this.inputDepartureLocation = this.inputDepartureLocation + value;
+      this.userInputDepartureLocation = this.userInputDepartureLocation + value;
     } else if (type === 'to') {
-      this.inputDestinationLocation = this.inputDestinationLocation + value;
+      this.userInputDestinationLocation = this.userInputDestinationLocation + value;
     }
   }
 }

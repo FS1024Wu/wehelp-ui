@@ -5,12 +5,14 @@ import {AddressComponent} from '../address/address.component';
 import {FormsModule} from '@angular/forms';
 import {NgForOf, NgIf} from '@angular/common';
 import {SectionHouseCleaningComponent} from '../section-house-cleaning/section-house-cleaning.component';
+import {ContactInputComponent} from "../contact-input/contact-input.component";
 
 @Component({
   selector: 'app-section-deep-cleaning',
   standalone: true,
   imports: [
     AddressComponent,
+    ContactInputComponent,
     FormsModule,
     NgForOf,
     NgIf

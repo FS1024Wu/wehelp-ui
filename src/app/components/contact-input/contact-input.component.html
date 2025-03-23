@@ -1,0 +1,69 @@
+<div class="contact-container">
+  <label>{{ label }}</label>
+
+  <!-- Phone Input -->
+  <div *ngIf="type === 'phone'" class="input-group">
+    <span class="prefix">+1</span>
+    <input
+      type="tel"
+      placeholder="4041234567"
+      [(ngModel)]="phoneNumber"
+      (ngModelChange)="onPhoneNumberChange()"
+      required
+    />
+  </div>
+  <div *ngIf="type === 'phone' && phoneNumber && !isPhoneValid()" class="error">
+    Invalid phone number format (XXX-XXX-XXXX)
+  </div>
+
+  <!-- Email Input -->
+  <div *ngIf="type === 'email'" class="input-group">
+    <div class="email-container">
+      <!-- Username Part -->
+      <input
+        type="text"
+        placeholder="user"
+        [(ngModel)]="emailUser"
+        (ngModelChange)="onEmailChange()"
+        required
+      />
+
+      <!-- @ Symbol -->
+      <span class="suffix">{{ '@' }}</span>
+
+      <!-- Domain Part -->
+      <input
+        type="text"
+        placeholder="provider"
+        [(ngModel)]="emailDomain"
+        (ngModelChange)="onEmailChange()"
+        required
+      />
+
+      <!-- . Symbol -->
+      <span class="suffix">{{ '.' }}</span>
+
+      <!-- Extension Part -->
+      <input
+        type="text"
+        placeholder="domain"
+        [(ngModel)]="emailExtension"
+        (ngModelChange)="onEmailChange()"
+        required
+      />
+    </div>
+  </div>
+  <div *ngIf="type === 'email' && email && !isEmailValid()" class="error">
+    Invalid email format
+  </div>
+
+  <!-- Preferred Contact Method -->
+  <div *ngIf="type === 'email'" class="preferred-method">
+    <label>Preferred Contact Method:</label>
+    <select [(ngModel)]="preferredMethod" (ngModelChange)="onPreferredMethodChange(preferredMethod)">
+      <option value="text">By Text</option>
+      <option value="email">By Email</option>
+      <option value="phone">By Phone</option>
+    </select>
+  </div>
+</div>
