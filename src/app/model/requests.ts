@@ -27,10 +27,10 @@ export type TaxiRequestVehicleType =
   | 'VAN';
 
 export enum RequestType {
-  TAXI = 'TAXI',
-  MOVING = 'MOVING',
-  HOUSE_CLEANING = 'HOUSE_CLEANING',
-  DEEP_CLEANING = 'DEEP_CLEANING'
+  TAXI = 'taxi',
+  MOVING = 'moving',
+  HOUSE_CLEANING = 'house_cleaning',
+  DEEP_CLEANING = 'deep_cleaning'
 }
 export enum PropertyType {
   APARTMENT='APARTMENT',

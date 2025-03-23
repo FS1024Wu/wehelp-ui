@@ -25,10 +25,11 @@ export class RequestComponent {
 
 
   constructor() {
-    this.today = this.getToday();
+    this.today = this.getServiceStartDay();
   }
-  getToday(): string {
+  getServiceStartDay(): string {
     const currentDate = new Date();
+    currentDate.setDate(currentDate.getDate() + 1); // Add 1 day
     return currentDate.toISOString().split('T')[0]; // Returns "YYYY-MM-DD"
   }
 

@@ -85,5 +85,6 @@ export class SectionMovingComponent extends RequestComponent{
     console.log('Submitted Destination Location:', this.destinationLocation);
     console.log('Submitted inputDepartureLocation:', this.inputDepartureLocation);
     console.log('Submitted inputDestinationLocation:', this.inputDestinationLocation);
+    console.log('after submit:', this.requestType);
   }
 }
